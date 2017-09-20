@@ -1,5 +1,5 @@
 import pickle
-import  sys
+import sys
 from Bus import Bus
 from Buses import Buses
 from Route import Route
@@ -11,12 +11,14 @@ buses = Buses()
 routes = Routes()
 plans = Plans()
 
+
 def isint(s):
     try:
         int(s)
         return True
     except ValueError:
         return False
+
 
 """buses .add(Bus(1, "BMW", "Panov", 16))
 buses.add(Bus(2," Mercedes-Benz", "Miller", 18))
@@ -31,9 +33,9 @@ routes.add(Route(3, "Kiev", "Lviv", 540, 8))
 routes.add(Route(4, "Lviv", "Odessa", 795, 12))
 routes.add(Route(5, "Odessa", "Dnepr", 522, 10))
 routes.add(Route(6, "Dnepr", "Lviv", 1000, 15))
-with open('Routes.txt', 'wb') as f: pickle.dump(routes, f)"""
+with open('Routes.txt', 'wb') as f: pickle.dump(routes, f)
 
-"""plans.add(Plan(1,1, "29.09.17 18:45"))
+plans.add(Plan(1,1, "29.09.17 18:45"))
 plans.add(Plan(1,1, "19.09.17 12:20"))
 plans.add(Plan(5,3, "29.09.17 17:00"))
 plans.add(Plan(1,2, "24.09.17 15:55"))
@@ -44,14 +46,15 @@ plans.add(Plan(2,5, "27.09.17 16:00"))
 plans.add(Plan(1,6, "19.09.17 20:20"))
 with open('Plans.txt', 'wb') as f: pickle.dump(plans, f)"""
 
-#стартовое меню
+
+# стартовое меню
 def mainMenu(buses, routes, plans):
     chooseFlag = False
     print("\t\nWelcome to the menu!\nChoose the section:\n1.Buses\n2.Routes\n3.Plans\n"
           "4.Save data to the file\n5.Load data from the file\n0.Exit")
-    while (chooseFlag==False):
+    while (chooseFlag == False):
         choose = input('Your choice: ')
-        if(choose=="1"):
+        if (choose == "1"):
             chooseFlag = True
             funcBuses(buses)
         elif (choose == "2"):
@@ -59,11 +62,14 @@ def mainMenu(buses, routes, plans):
             funcRoutes(routes)
         elif (choose == "3"):
             chooseFlag = True
-            funcPlans (plans)
-        elif(choose == "4"):
-            with open('Buses.txt', 'wb') as f: pickle.dump(buses, f)
-            with open('Routes.txt', 'wb') as f: pickle.dump(routes, f)
-            with open('Plans.txt', 'wb') as f: pickle.dump(plans, f)
+            funcPlans(plans)
+        elif (choose == "4"):
+            with open('Buses.txt', 'wb') as f:
+                pickle.dump(buses, f)
+            with open('Routes.txt', 'wb') as f:
+                pickle.dump(routes, f)
+            with open('Plans.txt', 'wb') as f:
+                pickle.dump(plans, f)
             print("Successfully saved!")
         elif (choose == "5"):
             try:
@@ -88,7 +94,8 @@ def mainMenu(buses, routes, plans):
         else:
             print("You input wrong symbol! You can input only 0,1,2,3,4,5. Try again.")
 
-def funcBuses (buses):
+
+def funcBuses(buses):
     print("\t\nWelcome to the section Buses!\nChoose the option:\n1.Display all buses\n"
           "2.Display buses according to the specified filed\n3.Add the bus\n4.Edit a bus by ID\n"
           "5.Delete the bus according to the specified filed\n6.Go back\n0.Exit")
@@ -111,7 +118,7 @@ def funcBuses (buses):
             driver = input("Driver = ")
             while (True):
                 numberOfSeats = input("Number of seats = ")
-                if(isint(numberOfSeats)):
+                if (isint(numberOfSeats)):
                     numberOfSeats = int(numberOfSeats)
                     break
                 else:
@@ -120,7 +127,7 @@ def funcBuses (buses):
                         continue
                     else:
                         funcBuses(buses)
-            buses.add(Bus(busID+1,model, driver, numberOfSeats))
+            buses.add(Bus(busID + 1, model, driver, numberOfSeats))
             print("You add the bus.")
             if (input("Enter 1 to continue. Enter any other value to exit: ") == '1'):
                 funcBuses(buses)
@@ -134,7 +141,7 @@ def funcBuses (buses):
             funcDeleteBus(buses, plans)
 
         elif (choose == "6"):
-            mainMenu(buses,routes,plans)
+            mainMenu(buses, routes, plans)
 
         elif (choose == "0"):
             sys.exit()
@@ -142,7 +149,8 @@ def funcBuses (buses):
         else:
             print("You input wrong symbol! You can input only 0,1,2,3,4,5,6. Try again.")
 
-def funcRoutes (routes):
+
+def funcRoutes(routes):
     chooseFlag = False
     print("\t\nWelcome to the section Routes!\nChoose the option:\n1.Display all routes\n"
           "2.Display routes according to the specified filed\n3.Add the route\n4.Edit a route by ID\n"
@@ -168,7 +176,7 @@ def funcRoutes (routes):
             wherefrom = input("Wherefrom = ")
             where = input("Where = ")
             while (True):
-                distance = input("Number of seats = ")
+                distance = input("Distance = ")
                 if (isint(distance)):
                     distance = int(distance)
                     break
@@ -213,7 +221,8 @@ def funcRoutes (routes):
         else:
             print("You input wrong symbol! You can input only 0,1,2,3,4,5,6. Try again.")
 
-def funcPlans (plans):
+
+def funcPlans(plans):
     print("\t\nWelcome to the section Plans!\nChoose the option:\n1.Display all plans\n"
           "2.Delete the plan according to the specified filed\n3.Go back\n0.Exit")
     while (True):
@@ -227,19 +236,20 @@ def funcPlans (plans):
                 sys.exit()
         elif (choose == "2"):
             funcDeletePlan(plans)
-        elif (choose == "4"):
+        elif (choose == "3"):
             mainMenu(buses, routes, plans)
         elif (choose == "0"):
             sys.exit()
         else:
             print("You input wrong symbol! You can input only 0,1,2,3. Try again.")
 
+
 def funcstrParameterHelp(objects, strParametr, index, busOrRoute):
     while (True):
         parameter = input('Input %s: ' % strParametr)
-        if(index == "1" or index == "4" or index == "5"):
-            parameter = int (parameter)
-        if (objects.exist (parameter, index)):
+        if (index == "1" or index == "4" or index == "5"):
+            parameter = int(parameter)
+        if (objects.exist(parameter, index)):
             print("\n***Display buses with %s = %s***" % (strParametr, parameter))
             print(objects.strParameter(parameter, index))
             if (input("Enter 1 to continue. Enter any other value to exit: ") == '1'):
@@ -259,6 +269,7 @@ def funcstrParameterHelp(objects, strParametr, index, busOrRoute):
                 if busOrRoute == "route":
                     funcstrRouteParameter(objects)
 
+
 def funcstrBusParameter(buses):
     print("\t\nChoose the parameter:\n1.BusID\n2.Model\n3.Driver\n4.Number Of Seats\n5.Go back\n0.Exit")
     while (True):
@@ -266,7 +277,7 @@ def funcstrBusParameter(buses):
         if (index == "1"):
             while (True):
                 try:
-                    funcstrParameterHelp (buses, "busID", index, "bus")
+                    funcstrParameterHelp(buses, "busID", index, "bus")
                     break
                 except ValueError:
                     print("BusID can be only a number.")
@@ -284,7 +295,7 @@ def funcstrBusParameter(buses):
         elif (index == "4"):
             while (True):
                 try:
-                    funcstrParameterHelp (buses, "number of seats", index , "bus")
+                    funcstrParameterHelp(buses, "number of seats", index, "bus")
                     break
                 except ValueError:
                     print("Number of seats can be only a number.")
@@ -293,7 +304,7 @@ def funcstrBusParameter(buses):
                     else:
                         funcstrBusParameter(buses)
 
-        elif(index == "5"):
+        elif (index == "5"):
             funcBuses(buses)
 
         elif (index == "0"):
@@ -302,6 +313,7 @@ def funcstrBusParameter(buses):
         else:
             print("You input wrong symbol! You can input only 0,1,2,3,4,5. Try again.")
 
+
 def funcstrRouteParameter(routes):
     print("\t\nChoose the parameter:\n1.RouteID\n2.Wherefrom\n3.Where\n4.Distance\n5.Time\n6.Go back\n0.Exit")
     while (True):
@@ -309,7 +321,7 @@ def funcstrRouteParameter(routes):
         if (index == "1"):
             while (True):
                 try:
-                    funcstrParameterHelp (routes, "routeID", index, "route")
+                    funcstrParameterHelp(routes, "routeID", index, "route")
                     break
                 except ValueError:
                     print("RouteID can be only a number.")
@@ -327,7 +339,7 @@ def funcstrRouteParameter(routes):
         elif (index == "4"):
             while (True):
                 try:
-                    funcstrParameterHelp (routes, "distance", index, "route")
+                    funcstrParameterHelp(routes, "distance", index, "route")
                     break
                 except ValueError:
                     print("RouteID can be only a number.")
@@ -339,7 +351,7 @@ def funcstrRouteParameter(routes):
         elif (index == "5"):
             while (True):
                 try:
-                    funcstrParameterHelp (routes, "time", index, "route")
+                    funcstrParameterHelp(routes, "time", index, "route")
                     break
                 except ValueError:
                     print("Time can be only a number.")
@@ -356,6 +368,7 @@ def funcstrRouteParameter(routes):
 
         else:
             print("You input wrong symbol! You can input only 0,1,2,3,4,5,6. Try again.")
+
 
 def funcEditBus(buses):
     busID = input('Input busID: ')
@@ -401,11 +414,12 @@ def funcEditBus(buses):
             funcEditBus(buses)
         else:
             funcBuses(buses)
-    print("You edit the bus with ID=%d."%busID)
+    print("You edit the bus with ID=%d." % busID)
     if (input("Enter 1 to continue. Enter any other value to exit: ") == '1'):
         funcBuses(buses)
     else:
         sys.exit()
+
 
 def funcEditeRoute(routes):
     routeID = input('Input routeID: ')
@@ -466,6 +480,7 @@ def funcEditeRoute(routes):
     else:
         sys.exit()
 
+
 def funcDeleteHelp(objects, plans, strParametr, index, busOrRoute):
     while (True):
         parameter = input('Input %s: ' % strParametr)
@@ -492,11 +507,12 @@ def funcDeleteHelp(objects, plans, strParametr, index, busOrRoute):
                 if busOrRoute == "route":
                     funcDeleteRoute(objects, plans)
 
-def funcDeletPlanHelp (plans, strParameter, index):
-    while(True):
-        parameter = input('Input %s: '%strParameter)
-        if(index == "1" or index== "2"):
-            parameter = int (parameter)
+
+def funcDeletPlanHelp(plans, strParameter, index):
+    while (True):
+        parameter = input('Input %s: ' % strParameter)
+        if (index == "1" or index == "2"):
+            parameter = int(parameter)
         if (plans.exist(parameter, index)):
             print("\n***Your records were successfully deleted***")
             plans.delete(parameter, index)
@@ -505,13 +521,14 @@ def funcDeletPlanHelp (plans, strParameter, index):
             else:
                 sys.exit()
         else:
-            print("This %s does not exist."%strParameter)
+            print("This %s does not exist." % strParameter)
             if (input("Enter 1 to try again. Enter any other value to go back: ") == '1'):
                 continue
             else:
                 funcDeletePlan(plans)
 
-def funcDeletePlan (plans):
+
+def funcDeletePlan(plans):
     print("\t\nChoose the parameter:\n1.BusID\n2.RouteID\n3.dateOfLeaving\n4.Go back\n0.Exit")
     while (True):
         index = input('Your choice: ')
@@ -527,7 +544,7 @@ def funcDeletePlan (plans):
                     else:
                         funcDeletePlan(plans)
         elif (index == "2"):
-            while  (True):
+            while (True):
                 try:
                     funcDeletPlanHelp(plans, "routeID", index)
                     break
@@ -538,7 +555,7 @@ def funcDeletePlan (plans):
                     else:
                         funcDeletePlan(plans)
         elif (index == "3"):
-                funcDeletPlanHelp(plans, "dateOfLeaving", index)
+            funcDeletPlanHelp(plans, "dateOfLeaving", index)
         elif (index == "4"):
             funcPlans(plans)
         elif (index == "0"):
@@ -546,7 +563,8 @@ def funcDeletePlan (plans):
         else:
             print("You input wrong symbol! You can input only 0,1,2,3,4. Try again.")
 
-def funcDeleteBus(buses,plans):
+
+def funcDeleteBus(buses, plans):
     print("\t\nChoose the parameter:\n1.BusID\n2.Model\n3.Driver\n4.Number Of Seats\n5.Go back\n0.Exit")
     while (True):
         index = input('Your choice: ')
@@ -589,6 +607,7 @@ def funcDeleteBus(buses,plans):
         else:
             print("You input wrong symbol! You can input only 0,1,2,3,4,5. Try again.")
 
+
 def funcDeleteRoute(routes, plans):
     print("\t\nChoose the parameter:\n1.routeID\n2.Wherefrom\n3.Where\n4.Go back\n0.Exit")
     while (True):
@@ -619,5 +638,6 @@ def funcDeleteRoute(routes, plans):
 
         else:
             print("You input wrong symbol! You can input only 0,1,2,3,4. Try again.")
+
 
 mainMenu(buses, routes, plans)

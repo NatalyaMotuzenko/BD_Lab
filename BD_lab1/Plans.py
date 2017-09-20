@@ -1,22 +1,20 @@
-class Plans (object):
-
-#инициализация
+class Plans(object):
+    # инициализация
     def __init__(self):
         self.plans = []
 
-#добавление записи
+    # добавление записи
     def add(self, plan):
         self.plans.append(plan)
 
-#вывод всех записей на экран
+    # вывод всех записей на экран
     def __str__(self):
         fullInfo = ""
         for ind, plan in enumerate(self.plans):
-            fullInfo = fullInfo + str(ind)+ ". " + str(plan) + "_____________________\n"
+            fullInfo = fullInfo + str(ind) + ". " + str(plan) + "_____________________\n"
         return fullInfo
 
-
-    def delete (self, parameter, index):
+    def delete(self, parameter, index):
         ind = 0
         while ind < len(self.plans):
             # busID
@@ -33,7 +31,7 @@ class Plans (object):
                 continue
             ind += 1  # подсчет количества пропущеных записей
 
-    def exist (self,  parameter, index):
+    def exist(self, parameter, index):
         if index == "1":  # проверка существования busID
             for plan in self.plans:
                 if plan.busID == parameter:

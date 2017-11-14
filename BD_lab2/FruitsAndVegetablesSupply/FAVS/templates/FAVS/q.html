@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table border="1" align="center">
+   <caption>Поставки на склад</caption>
+   <tr>
+    <th>ID Поставки</th>
+    <th>Фрукт/Овощ</th>
+    <th>Количество</th>
+    <th>Посадка</th>
+    <th>Склад</th>
+    <th>Дата поставки</th>
+    <th>Водитель</th>
+       <th>Удалить</th>
+       <th>Изменить</th>
+   </tr>
+    {%for i in data%}
+    <tr><td>{{i.0}}</td><td>{{i.1}}</td><td>{{i.2}}</td><td>{{i.3}}</td><td>{{i.4}}</td><td>{{i.5}}</td><td>{{i.6}}</td><td><form method="post" name="d{{i.0}}">{% csrf_token %} <input type="submit" name="d" value="{{i.0}}"></input></form></td><td><form method="post"  >{% csrf_token %}<input  type="submit" name="c" value="{{i.0}}"></input></form></td></tr>
+   {%endfor%}
+  </table>
+
+  <div align="center">
+      <form method="post">
+          {% csrf_token %}
+    <input type = "submit" name = "insert" value = "Добавить" >
+      </form>
+      {%if add%}
+      <form method="post">
+        {% csrf_token %}
+
+        <input id="00" type="text" name="id поставки" value="{{ add }}" disabled>
+          <select name="Фрукт/Овощ" >
+          {% for i in dictvalues.fruitsandvegetables %}
+              <option>{{i.1}}</option>
+          {% endfor %}
+          </select>
+
+        <input id="02" type="number" min ="0" name="Количество" value="0">
+          <select name="Посадка">
+          {% for i in dictvalues.plantings %}
+              <option>{{i.1}}</option>
+          {% endfor %}
+          </select>
+          <select name="Склад">
+          {% for i in dictvalues.storehouses %}
+              <option>{{i.1}}</option>
+          {% endfor %}
+          </select>
+        <input id="05" type="date" name="Дата Поставки" value="2017-08-11" >
+
+          <select name="Водитель">
+          {% for i in dictvalues.drivers %}
+              <option>{{i.1}}</option>
+          {% endfor %}
+          </select>
+        <input type = "submit" name = "applyinsert" >
+
+      </form>
+          {%endif%}
+  </div>
+
+    {%if id%}
+<p align="center">Изменение</p>
+     <form align="center" method="post">
+        {% csrf_token %}
+
+        <input id="0" type="text" name="id поставки" value="{{ id.0 }}" disabled>
+          <select name="Фрукт/Овощ"  >
+          {% for i in dictvalues.fruitsandvegetables %}
+              {% if id.1 == i.1 %}
+                <option selected="selected">{{i.1}}</option>
+              {% endif %}
+              <option>{{i.1}}</option>
+          {% endfor %}
+          </select>
+        <input id="2" type="number" min="0" name="Количество" value="{{ id.2 }}">
+          <select name="Посадка">
+          {% for i in dictvalues.plantings %}
+              {% if id.3 == i.1 %}
+                <option selected="selected">{{i.1}}</option>
+              {% endif %}
+              <option>{{i.1}}</option>
+          {% endfor %}
+          </select>
+          <select name="Склад">
+          {% for i in dictvalues.storehouses %}
+              {% if id.4 == i.1 %}
+                <option selected="selected">{{i.1}}</option>
+              {% endif %}
+              <option>{{i.1}}</option>
+          {% endfor %}
+          </select>
+        <input id="5" type="date" name="Дата Поставки" value="{{ id.5 }}">
+          <select name="Водитель">
+          {% for i in dictvalues.drivers %}
+              {% if id.6 == i.1 %}
+                <option selected="selected">{{i.1}}</option>
+              {% endif %}
+              <option>{{i.1}}</option>
+          {% endfor %}
+          </select>
+        <input type = "submit" name = "applychange" >
+
+      </form>
+    {%endif%}
+<div align="center">
+    <br>
+    <form action="query"><input type="submit" name ="Query" value="Запросы"></form>
+
+</div>
+</body>
+</html>

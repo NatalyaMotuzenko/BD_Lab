@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post">
+    {% csrf_token %}
+        Запрос на диапазон дат<br>
+        Поставки в заданом диапазоне дат: от
+        <input type="date" name="Дата От" value="{{data1}}">
+        до
+        <input type="date" name="Дата До" value="{{data2}}">
+        <input type="submit" name="Query1" value="Go">
+    </form>
+<br>
+{% if i %}
+<table border="1" >
+   <caption>Поставки на склад в указаный диапазон дат</caption>
+   <tr>
+    <th>ID Поставки</th>
+    <th>Фрукт/Овощ</th>
+    <th>Количество</th>
+    <th>Посадка</th>
+    <th>Склад</th>
+    <th>Дата поставки</th>
+    <th>Водитель</th>
+   </tr>
+    {%for j in i%}
+    <tr><td>{{j.0}}</td><td>{{j.1}}</td><td>{{j.2}}</td><td>{{j.3}}</td><td>{{j.4}}</td><td>{{j.5}}</td><td>{{j.6}}</td>
+   {%endfor%}
+  </table>
+{% endif %}
+<form method="post">
+    {% csrf_token %}
+        Запрос на логический тип
+        <br>
+        Выберете вид топлива (1-бензин/дизельное топливо,0-газ)
+        <input type="number" name="number" min="0" max="1" value="{{number}}">
+        <input type="submit" name="Query2" value="Go">
+    </form>
+<br>
+{% if i1 %}
+<table border="1" >
+   <caption>Количество машин с указанным видом топлива</caption>
+   <tr>
+    <th>Вид топлива</th>
+    <th>Количество</th>
+   </tr>
+    {%for i in i1%}
+    <tr><td>{{i.0}}</td><td>{{i.1}}</td>
+   {%endfor%}
+  </table>
+{% endif %}
+<form method="post">
+    {% csrf_token %}
+    Запрос "Слово не входит"
+        <br>
+        Введите слово, которое не войдет в описание фрукта/овоща
+        <input type="text" name="word"value="{{word}}">
+        <input type="submit" name="Query3" value="Go">
+    </form>
+<br>
+{% if i2 %}
+<table border="1" >
+   <caption>Слово не входит</caption>
+   <tr>
+    <th>ID Фрукта/Овоща </th>
+    <th>Наименование</th>
+    <th>Сорт</th>
+    <th>Описание</th>
+    <th>Цена</th>
+    <th>Срок хранения</th>
+   </tr>
+    {%for i in i2%}
+    <tr><td>{{i.0}}</td><td>{{i.1}}</td><td>{{i.2}}</td><td>{{i.3}}</td><td>{{i.4}}</td><td>{{i.5}}</td>
+   {%endfor%}
+  </table>
+{% endif %}
+<form method="post">
+    {% csrf_token %}
+        Запрос "Целая фраза"
+        <br>
+        Введите фразу, которая войдет в описание фрукта/овоща
+        <input type="text" name="text" value="{{text}}">
+        <input type="submit" name="Query4" value="Go">
+    </form>
+<br>
+{% if i3 %}
+<table border="1" >
+   <caption>Фраза входит</caption>
+   <tr>
+    <th>ID Фрукта/Овоща </th>
+    <th>Наименование</th>
+    <th>Сорт</th>
+    <th>Описание</th>
+    <th>Цена</th>
+    <th>Срок хранения</th>
+   </tr>
+    {%for i in i3%}
+    <tr><td>{{i.0}}</td><td>{{i.1}}</td><td>{{i.2}}</td><td>{{i.3}}</td><td>{{i.4}}</td><td>{{i.5}}</td>
+   {%endfor%}
+  </table>
+{% endif %}
+<form action="/supply"><input type="submit" value="Back"></form>
+</body>
+</html>

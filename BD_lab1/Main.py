@@ -47,7 +47,6 @@ plans.add(Plan(1,6, "19.09.17 20:20"))
 with open('Plans.txt', 'wb') as f: pickle.dump(plans, f)"""
 
 
-# стартовое меню
 def mainMenu(buses, routes, plans):
     chooseFlag = False
     print("\t\nWelcome to the menu!\nChoose the section:\n1.Buses\n2.Routes\n3.Plans\n"

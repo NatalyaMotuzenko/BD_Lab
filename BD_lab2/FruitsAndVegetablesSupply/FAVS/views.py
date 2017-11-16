@@ -11,16 +11,16 @@ def index(request):
 
 
     #load from json
-    with open('C:\\Users\\Fox\\PycharmProjects\\bdlab2\\FruitsAndVegetablesSupply\\FAVS\\json_files\\fruits_and_vegetables.json','r') as f:
+    with open('D:\\2. КПИ\\Базы даных Петрашенко\\лабы\\BD_lab2\\FruitsAndVegetablesSupply\\FAVS\\json_files\\fruits_and_vegetables.json','r') as f:
         tmp_str = f.read()
         fruits_and_vegetables = json.loads(tmp_str)
-    with open('C:\\Users\\Fox\\PycharmProjects\\bdlab2\\FruitsAndVegetablesSupply\\FAVS\\json_files\\plantings.json','r') as f:
+    with open('D:\\2. КПИ\\Базы даных Петрашенко\\лабы\\BD_lab2\\FruitsAndVegetablesSupply\\FAVS\\json_files\\plantings.json','r') as f:
         tmp_str = f.read()
         plantings = json.loads(tmp_str)
-    with open('C:\\Users\\Fox\\PycharmProjects\\bdlab2\\FruitsAndVegetablesSupply\\FAVS\\json_files\\storehouses.json','r') as f:
+    with open('D:\\2. КПИ\\Базы даных Петрашенко\\лабы\\BD_lab2\\FruitsAndVegetablesSupply\\FAVS\\json_files\\storehouses.json','r') as f:
         tmp_str = f.read()
         storehouses = json.loads(tmp_str)
-    with open('C:\\Users\\Fox\\PycharmProjects\\bdlab2\\FruitsAndVegetablesSupply\\FAVS\\json_files\\transport.json','r') as f:
+    with open('D:\\2. КПИ\\Базы даных Петрашенко\\лабы\\BD_lab2\\FruitsAndVegetablesSupply\\FAVS\\json_files\\transport.json','r') as f:
         tmp_str = f.read()
         transport = json.loads(tmp_str)
     supply_to_storehouses = db.saveMainJson()
